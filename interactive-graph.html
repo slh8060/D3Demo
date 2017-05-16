@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/d3.js"></script>
+</head>
+<body style="color: lawngreen">
+
+<script type="text/javascript">
+    var width = 400;
+    var height = 400;
+    var svg = d3.selectAll('body')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+    var circle = svg.append('circle')
+            .attr('cx', 80)
+            .attr('cy', 80)
+            .attr('r', 50)
+            .style('fill', 'lawngreen')
+            .style( 'stroke', 'red')
+            .style('stroke-width', 2)
+            .on('mouseover',function () {
+              d3.select(this)
+                      .style('fill','lightblue')
+            })
+            .on('mouseleave',function () {
+                d3.select(this)
+                        .style('fill','lawngreen')
+            })
+            .on('click',function () {
+                alert('123');
+            });
+</script>
+</body>
+</html>

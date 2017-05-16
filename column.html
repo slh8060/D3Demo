@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/d3.js"></script>
+</head>
+<body>
+
+
+<script type="text/javascript">
+    //画布大小
+    var width = '400';
+    var height = '400';
+    //在body里添加一个svg画布
+    var svg = d3.select('body')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+    //画布周边的空白
+    var padding = {top: 20, right: 30, bottom: 20, left: 30};
+
+    //定义一个数组
+    var dataset = [10, 20, 30, 40, 33, 24, 12, 5];
+    //定义x轴的比例尺:序数比例尺
+    var xScale = d3.scaleBand()
+            .domain(d3.range(dataset.length))
+            .range([0, width - padding.left - padding.right])
+    //定义y轴的比例尺：线性比例尺
+    var yScale = d3.scaleLinear()
+            .domain([0, d3.max(dataset)])
+            .range([height - padding.top - padding.bottom, 0])
+
+    //定义X轴:x轴刻度的方向向下
+    var xAxis = d3.axisBottom()
+            .scale(xScale);
+    //定义Y轴：y轴刻度的方向向左
+    var yAxis = d3.axisLeft()
+            .scale(yScale);
+
+    //矩形之间的空白
+    var rectPadding = 4;
+    //添加矩形元素
+    var rects = svg.selectAll(".MyRect")
+                    .data(dataset)
+                    .enter()
+                    .append('rect')
+                    .attr('class', 'MyRect')
+                    .attr('transform', 'translate(' + padding.left + ',' + padding.right + ')')
+                    .attr('x', function (d, i) {
+                        return xScale(i) + rectPadding / 2;
+                    })
+                    .attr('y', function (d) {
+                        return yScale(d) - 10;
+                    })
+
+                    .attr('width', 35)
+                    .attr('height', function (d) {
+                        return height - padding.top - padding.bottom - yScale(d);
+                    })
+                    .attr('fill', 'cornflowerblue')
+                    .on("mouseover", function () {    //交互式操作
+                        d3.select(this)
+                                .attr("fill", "yellow");
+                    })
+                    .on("mouseout", function () {
+                        d3.select(this)
+                                .transition()
+                                .duration(500)
+                                .attr("fill", "cornflowerblue");
+                    })
+                    .on('click',function (d,i) {
+                        alert('您点击的是第'+i+'个，值为'+d);
+                    })
+                    .transition()     //让图表动起来
+                    .duration(3000)
+                    .delay(function (d, i) {
+                        return 200 * i;
+                    })
+            ;
+    //添加文字元素
+    var texts = svg.selectAll('.MyText')
+            .data(dataset)
+            .enter()
+            .append('text')
+            .attr('class', 'MyText')
+            .attr('transform', 'translate(' + padding.left + ',' + padding.right + ')')
+            .attr('x', function (d, i) {
+                return xScale(i) + 10;
+            })
+            .attr('y', function (d) {
+                return yScale(d) + 10;
+            })
+            /* .attr('dx', function () {
+             return (xScale.round() - rectPadding) / 2;
+             })
+             .attr('dy', function () {
+             return 20;
+             })*/
+            .text(function (d) {
+                return d;
+            })
+            .attr('fill', 'white');
+
+    //添加x轴
+    svg.append('g')
+            .attr('class', 'axis')
+            .attr("transform", "translate(" + padding.left + "," + (height - padding.bottom) + ")")
+            .call(xAxis);
+    //添加y轴
+
+    svg.append('g')
+            .attr('class', 'axis')
+            .attr("transform", "translate(" + padding.left + "," + padding.top + ")")
+            .call(yAxis);
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/d3.js"></script>
+</head>
+<body style="height: 100%">
+
+
+
+<script type="text/javascript">
+    //定义画布
+    var width = '100%';
+    var height = '100%';
+    var svg = d3.select('body')
+            .append('svg')
+            .attr('width',width)
+            .attr('height',height);
+
+    var dataset = [70,120,130,90,210];
+    var rectHeight = 25;
+    svg.selectAll('rect')   //选择svg内所有的矩形
+            .data(dataset)  //绑定数据
+            .enter()        //指定选择集的enter部分
+            .append('rect') //添加足够数量的矩形元素
+            .attr('x',20)
+            .attr('y',function (d,i) {
+                return i * rectHeight;
+            })
+            .attr('width',0)
+            .attr('height',rectHeight - 2)
+            .attr('fill','blue')
+            .transition()
+            .delay(function (d,i) {
+                return i * 200;
+            })
+            .duration(2000)     //指定过渡的时间
+            .attr('width',function (d) {
+                return d;
+            });
+    svg.selectAll('text')
+            .data(dataset)
+            .enter()
+            .append('text')
+            .attr('class','MyText')
+            .attr('x',function (d,i) {
+                return 30;
+            })
+            .attr('y',function (d,i) {
+                return (i+1) * rectHeight - 8;
+            })
+            .text(function (d) {
+                return d;
+            })
+            .attr('fill','#fff');
+
+
+    svg.selectAll('rect')
+            .data(dataset)
+            .enter()
+            .append('rect');
+
+
+
+</script>
+</body>
+</html>

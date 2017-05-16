@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>客户端下载</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+
+    <style>
+
+/*
+      html{font-size:10px}
+        @media screen and (min-width:321px) and (max-width:375px){html{font-size:11px}}
+        @media screen and (min-width:376px) and (max-width:414px){html{font-size:12px}}
+        @media screen and (min-width:415px) and (max-width:639px){html{font-size:15px}}
+        @media screen and (min-width:640px) and (max-width:719px){html{font-size:20px}}
+        @media screen and (min-width:720px) and (max-width:749px){html{font-size:22.5px}}
+        @media screen and (min-width:750px) and (max-width:799px){html{font-size:23.5px}}*/
+        @media screen and (min-width:768px){html{font-size:25px}}
+
+        .icon-logo {
+            font-size: 0.8rem;
+        }
+        .title {
+            font-size: 0.4rem;
+        }
+        .info {
+            font-size: 0.26rem;
+        }
+        .btn {
+            padding: 0.05rem;
+            font-size: 0.16rem;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <table class="table">
+        <tbody>
+        <tr>
+            <td style="vertical-align: middle">
+                <span class="glyphicon glyphicon-barcode icon-logo"></span>
+            </td>
+            <td>
+                <p class="title">移动OA</p>
+                <p class="info">
+                    <span>平台：Android</span>
+                    <span>大小：8M</span>
+                </p>
+            </td>
+            <td style="vertical-align: middle">
+                <button class="btn btn-primary">证书</button>
+                <button class="btn btn-primary">下载</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="../js/jquery-3.1.0.js"></script>
+<script src="../bootstrap/js/bootstrap.js"></script>
+<script>
+    /*(function (doc,win) {
+        var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.width;
+                    if (!clientWidth)
+                        return;
+                    docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                };
+
+        if (!doc.addEventListener)
+            return;
+        win.addEventListener(resizeEvt,recalc,false);
+        doc.addEventListener('DOMContentLoaded',recalc,false);
+    })(document,window)*/
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+
+                    if (clientWidth > 768) {
+                        docEl.style.fontSize = 60 + 'px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    }
+
+
+                };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+</script>
+</body>
+</html>
