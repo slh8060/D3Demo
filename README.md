@@ -1,3 +1,6 @@
+d3官方文档：https://d3js.org/
+
+
 一、深入理解Updata、Enter、Exit
 地址：http://wiki.jikexueyuan.com/project/d3wiki/enterexit.html
 1、有数据，而没有足够图形元素的时候:
@@ -14,11 +17,7 @@ svg.selectAll("rect")   //选择svg内所有的矩形
 ![image](http://github.com/slh8060/D3Demo/raw/master/images/11.png)
 
 
-二、例子说明
-1、中国地图的Demo 要部署到服务器才能 访问到china.json
 
-三、地址
-d3官方文档：https://d3js.org/
 
 
      
